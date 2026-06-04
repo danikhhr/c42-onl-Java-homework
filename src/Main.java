@@ -1,7 +1,6 @@
 public class Main {
 
     public static void main(String[] args) {
-
         System.out.println("task number 1:");
         taskNum1();
 
@@ -22,45 +21,39 @@ public class Main {
     }
 
     public static void taskNum1() {
-        // a = 4 * (b + c - 1) / 2
-        int a, b = 5, c = 4;
-        a = 4 * (b + c - 1) / 2;
+        int b = 5, c = 4;
         System.out.println("b = " + b);
         System.out.println("c = " + c);
-        System.out.println("a = 4 * (b + c - 1) / 2 = " + a);
-        System.out.println("-----------------------------------");
+        System.out.println("a = 4 * (b + c - 1) / 2 = " + 4 * (b + c - 1) / 2);
+        System.out.println("-".repeat(52));
 
     }
 
     public static void taskNum2() {
-        // sum = n / 10 + n % 10
         int n = 25;
         System.out.println("n = " + n);
         System.out.println("sum = n / 10 + n % 10 = " + ( n / 10 + n % 10));
-        System.out.println("-----------------------------------");
+        System.out.println("-".repeat(52));
 
     }
 
     public static void taskNum3() {
-        // sum = n / 100 + n % 10 + n / 10 % 10
         int n = 126;
         System.out.println("n = " + n);
         System.out.println("sum = n / 100 + n % 10 + n / 10 % 10 = " + (n / 100 + n % 10 + n / 10 % 10));
-        System.out.println("-----------------------------------");
+        System.out.println("-".repeat(52));
 
     }
 
     public static void taskNum4() {
-        // res = Math.round(n)
         double n = 126.4;
         System.out.println("n = " + n);
         System.out.println("res = Math.round(n) = " + Math.round(n));
-        System.out.println("-----------------------------------");
+        System.out.println("-".repeat(52));
 
     }
 
     public static void taskNum5() {
-        // res = q / w
         int q = 21, w = 8;
         int firstPart = 21 / 8;
         int secondPart = 21 % 8;
@@ -68,13 +61,11 @@ public class Main {
         System.out.println("q = " + 21);
         System.out.println("w = " + 8);
         System.out.println("res = " + firstPart + "." + secondPart);
-        System.out.println("-----------------------------------");
+        System.out.println("-".repeat(52));
 
     }
 
     public static void taskNum6() {
-        //num1 = 5; num2 = 4 => num1 = 4; num2 = 5
-
         int num1 = 5, num2 = 4, temp;
         temp = num1;
         num1 = num2;
@@ -83,7 +74,7 @@ public class Main {
         System.out.println("num1 = " + 5);
         System.out.println("num2 = " + 4);
         System.out.printf("num1 = %d, num2 = %d\n", num1, num2);
-        System.out.println("-----------------------------------");
+        System.out.println("-".repeat(52));
 
     }
 
