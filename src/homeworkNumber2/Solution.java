@@ -1,5 +1,6 @@
-public class Main {
+package homeworkNumber2;
 
+public class Solution {
     public static void main(String[] args) {
         System.out.println("task number 1:");
         taskNum1();
@@ -77,6 +78,4 @@ public class Main {
         System.out.println("-".repeat(52));
 
     }
-
-
 }
