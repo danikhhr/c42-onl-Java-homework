@@ -23,59 +23,54 @@ public class Solution {
 
     public static void taskNum1() {
         int b = 5, c = 4;
-        System.out.println("b = " + b);
-        System.out.println("c = " + c);
-        System.out.println("a = 4 * (b + c - 1) / 2 = " + 4 * (b + c - 1) / 2);
-        System.out.println("-".repeat(52));
+        int a = 4 * (b + c - 1) / 2;
 
+        System.out.printf("b = %d, c = %d\na = 4 * (b + c - 1) / 2 = %d\n%s\n",
+                b, c, a, "-".repeat(50));
     }
 
     public static void taskNum2() {
         int n = 25;
-        System.out.println("n = " + n);
-        System.out.println("sum = n / 10 + n % 10 = " + ( n / 10 + n % 10));
-        System.out.println("-".repeat(52));
+        int sum = n / 10 + n % 10;
 
+        System.out.printf("n = %d\nsum = n / 10 + n %% 10 = %d\n%s\n",
+                n, sum, "-".repeat(50));
     }
 
     public static void taskNum3() {
         int n = 126;
-        System.out.println("n = " + n);
-        System.out.println("sum = n / 100 + n % 10 + n / 10 % 10 = " + (n / 100 + n % 10 + n / 10 % 10));
-        System.out.println("-".repeat(52));
+        int sum = n / 100 + n % 10 + n / 10 % 10;
 
+        System.out.printf("n = %d\nsum = n / 100 + n %% 10 + n / 10 %% 10 = %d\n%s\n",
+                n, sum, "-".repeat(50));
     }
 
     public static void taskNum4() {
         double n = 126.4;
-        System.out.println("n = " + n);
-        System.out.println("res = Math.round(n) = " + Math.round(n));
-        System.out.println("-".repeat(52));
+        long rounded = Math.round(n);
 
+        System.out.printf("n = %.1f\nres = Math.round(n) = %d\n%s\n",
+                n, rounded, "-".repeat(50));
     }
 
     public static void taskNum5() {
         int q = 21, w = 8;
-        int firstPart = 21 / 8;
-        int secondPart = 21 % 8;
+        int firstPart = q / w;
+        int secondPart = q % w;
 
-        System.out.println("q = " + 21);
-        System.out.println("w = " + 8);
-        System.out.println("res = " + firstPart + "." + secondPart);
-        System.out.println("-".repeat(52));
-
+        System.out.printf("q = %d, w = %d\nres = %d.%d\n%s\n",
+                q, w, firstPart, secondPart, "-".repeat(50));
     }
 
     public static void taskNum6() {
-        int num1 = 5, num2 = 4, temp;
-        temp = num1;
+        int num1 = 5, num2 = 4;
+
+        System.out.printf("До swap: num1 = %d, num2 = %d\n", num1, num2);
+
+        int temp = num1;
         num1 = num2;
         num2 = temp;
 
-        System.out.println("num1 = " + 5);
-        System.out.println("num2 = " + 4);
-        System.out.printf("num1 = %d, num2 = %d\n", num1, num2);
-        System.out.println("-".repeat(52));
-
+        System.out.printf("После swap: num1 = %d, num2 = %d\n%s\n", num1, num2, "-".repeat(50));
     }
 }
