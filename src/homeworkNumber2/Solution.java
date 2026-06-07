@@ -1,6 +1,9 @@
 package homeworkNumber2;
 
 public class Solution {
+
+    public static final String sep = "-".repeat(50);
+
     public static void main(String[] args) {
         System.out.println("task number 1:");
         taskNum1();
@@ -26,7 +29,7 @@ public class Solution {
         int a = 4 * (b + c - 1) / 2;
 
         System.out.printf("b = %d, c = %d\na = 4 * (b + c - 1) / 2 = %d\n%s\n",
-                b, c, a, "-".repeat(50));
+                b, c, a, sep);
     }
 
     public static void taskNum2() {
@@ -34,7 +37,7 @@ public class Solution {
         int sum = n / 10 + n % 10;
 
         System.out.printf("n = %d\nsum = n / 10 + n %% 10 = %d\n%s\n",
-                n, sum, "-".repeat(50));
+                n, sum, sep);
     }
 
     public static void taskNum3() {
@@ -42,15 +45,15 @@ public class Solution {
         int sum = n / 100 + n % 10 + n / 10 % 10;
 
         System.out.printf("n = %d\nsum = n / 100 + n %% 10 + n / 10 %% 10 = %d\n%s\n",
-                n, sum, "-".repeat(50));
+                n, sum, sep);
     }
 
     public static void taskNum4() {
         double n = 126.4;
-        long rounded = Math.round(n);
+        long res = Math.round(n);
 
-        System.out.printf("n = %.1f\nres = Math.round(n) = %d\n%s\n",
-                n, rounded, "-".repeat(50));
+        System.out.printf("%.1f = Math.round(n) = %d\n%s\n",
+                n, res, sep);
     }
 
     public static void taskNum5() {
@@ -59,7 +62,7 @@ public class Solution {
         int secondPart = q % w;
 
         System.out.printf("q = %d, w = %d\nres = %d.%d\n%s\n",
-                q, w, firstPart, secondPart, "-".repeat(50));
+                q, w, firstPart, secondPart, sep);
     }
 
     public static void taskNum6() {
@@ -71,6 +74,6 @@ public class Solution {
         num1 = num2;
         num2 = temp;
 
-        System.out.printf("После swap: num1 = %d, num2 = %d\n%s\n", num1, num2, "-".repeat(50));
+        System.out.printf("После swap: num1 = %d, num2 = %d\n%s\n", num1, num2, sep);
     }
 }
