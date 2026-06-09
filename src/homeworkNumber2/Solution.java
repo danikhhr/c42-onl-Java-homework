@@ -6,33 +6,34 @@ public class Solution {
 
     public static void main(String[] args) {
         System.out.println("task number 1:");
-        taskNum1();
+        calculate();
 
         System.out.println("task number 2:");
-        taskNum2();
+        printSumOfTwoDigits();
 
         System.out.println("task number 3:");
-        taskNum3();
+        printSumOfThreeDigits();
 
         System.out.println("task number 4:");
-        taskNum4();
+        roundingNumber();
 
         System.out.println("task number 5:");
-        taskNum5();
+        printDivisionResult();
 
         System.out.println("task number 6:");
-        taskNum6();
+        swapNumbers();
     }
 
-    public static void taskNum1() {
-        int b = 5, c = 4;
+    public static void calculate() {
+        int b = 5;
+        int c = 4;
         int a = 4 * (b + c - 1) / 2;
 
         System.out.printf("b = %d, c = %d\na = 4 * (b + c - 1) / 2 = %d\n%s\n",
                 b, c, a, sep);
     }
 
-    public static void taskNum2() {
+    public static void printSumOfTwoDigits() {
         int n = 25;
         int sum = n / 10 + n % 10;
 
@@ -40,7 +41,7 @@ public class Solution {
                 n, sum, sep);
     }
 
-    public static void taskNum3() {
+    public static void printSumOfThreeDigits() {
         int n = 126;
         int sum = n / 100 + n % 10 + n / 10 % 10;
 
@@ -48,7 +49,7 @@ public class Solution {
                 n, sum, sep);
     }
 
-    public static void taskNum4() {
+    public static void roundingNumber() {
         double n = 126.4;
         long res = Math.round(n);
 
@@ -56,8 +57,9 @@ public class Solution {
                 n, res, sep);
     }
 
-    public static void taskNum5() {
-        int q = 21, w = 8;
+    public static void printDivisionResult() {
+        int q = 21;
+        int w = 8;
         int firstPart = q / w;
         int secondPart = q % w;
 
@@ -65,8 +67,9 @@ public class Solution {
                 q, w, firstPart, secondPart, sep);
     }
 
-    public static void taskNum6() {
-        int num1 = 5, num2 = 4;
+    public static void swapNumbers() {
+        int num1 = 5;
+        int num2 = 4;
 
         System.out.printf("До swap: num1 = %d, num2 = %d\n", num1, num2);
 
