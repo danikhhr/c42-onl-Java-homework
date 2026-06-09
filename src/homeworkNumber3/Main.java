@@ -43,21 +43,21 @@ public class Main {
     }
 
     public static int[] taskNum4() {
-        int[] numbers = new int[14];
+        int end = 98, step = 7;
+        int length = end / step;
+        int[] numbers = new int[length];
         int num = 7, count = 0;
-        while (num <= 98 && count < 14) {
+        while (num <= end && count < length) {
             numbers[count] = num;
             count++;
-            num += 7;
+            num += step;
         }
         return numbers;
     }
 
-    public static int taskNum5(int num) {
-        Scanner scanner = new Scanner(System.in);
+    public static int taskNum5(int num, Scanner scanner) {
         while (true){
            if(num > 1){
-               scanner.close();
                return (int) ((num - 1) * ((double) num / 2));
            }
            else {
@@ -71,11 +71,10 @@ public class Main {
     }
 
     public static int readInt(Scanner scanner) {
-        int num;
+
         while (true) {
             if (scanner.hasNextInt()) {
-                num = scanner.nextInt();
-                break;
+                return scanner.nextInt();
             } else {
                 System.out.println("Ошибка! Введите правильное целое число.");
                 scanner.next();
@@ -83,10 +82,6 @@ public class Main {
             }
         }
 
-
-
-
-        return num;
     }
 
     public static void fullOutputData() throws InterruptedException {
@@ -97,12 +92,9 @@ public class Main {
             if(i != 3 && i != 4){
                 System.out.printf("задание номер %d:\nВведите целое число " +
                         "для задания номер %d\n", i, i);
+                        num = readInt(scanner);
             } else {
                 System.out.printf("задание номер %d:\n", i);
-            }
-
-            if(i != 3 && i != 4){
-                num = readInt(scanner);
             }
 
 
@@ -111,7 +103,7 @@ public class Main {
                 case 2 -> taskNum2(num);
                 case 3 -> Arrays.toString(taskNum3());
                 case 4 -> Arrays.toString(taskNum4());
-                case 5 -> taskNum5(num);
+                case 5 -> taskNum5(num, scanner);
                 default -> throw new IllegalStateException("Unexpected value: " + i);
             }, sep);
 
