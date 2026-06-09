@@ -57,11 +57,11 @@ public class Main {
 
     public static int sumDigits(int num, Scanner scanner) {
         while (true){
-           if(num > 1){
+           if(num > 0){
                return (int) ((num - 1) * ((double) num / 2));
            }
            else {
-               System.out.println("Число должно быть больше 1, повторите попытку");
+               System.out.println("Число должно быть больше 0, повторите попытку");
                num = readInt(scanner);
            }
         }
