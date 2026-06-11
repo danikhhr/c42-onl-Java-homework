@@ -1,6 +1,5 @@
 package homeworkNumber3;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -10,8 +9,8 @@ public class Main {
 
     public enum Temperature {
         WARM,
-        COLD,
-        NORMAL
+        NORMAL,
+        COLD
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -25,90 +24,87 @@ public class Main {
     public static Temperature findTemperature(int temperature) {
         if (temperature > -5) {
             return Temperature.WARM;
-        } else if (temperature <= -20) {
-            return Temperature.COLD;
-        } else {
+        } else if (temperature >= -20) {
             return Temperature.NORMAL;
+        } else {
+            return Temperature.COLD;
         }
     }
 
-    public static int[] getSquaresFrom10To20() {
-        int[] numbers = new int[11];
-        int num;
-        for (int i = 0; i < numbers.length; i++) {
-            num = 10 + i;
-            numbers[i] = num * num;
+    public static void printSquaresFrom10To20() {
+        for (int i = 10; i <= 20; i++) {
+            System.out.print((i * i) + " ");
         }
-        return numbers;
+        System.out.println();
     }
 
-    public static int[] createArrayOfSevens() {
-        int end = 98, step = 7;
-        int length = end / step;
-        int[] numbers = new int[length];
-        int num = 7, count = 0;
-        while (num <= end && count < length) {
-            numbers[count] = num;
-            count++;
-            num += step;
+    public static void printArrayOfSevens() {
+        int num = 7;
+        while (num <= 98) {
+            System.out.print(num + " ");
+            num += 7;
         }
-        return numbers;
+        System.out.println();
     }
 
     public static int sumDigits(int num, Scanner scanner) {
-        while (true){
-           if(num > 0){
-               return (int) ((num - 1) * ((double) num / 2));
-           }
-           else {
-               System.out.println("Число должно быть больше 0, повторите попытку");
-               num = readInt(scanner);
-           }
+        while (true) {
+            if (num > 0) {
+                return (int) ((num - 1) * (double) num / 2);
+            } else {
+                System.out.println("Число должно быть больше 0, повторите попытку");
+                num = readInt(scanner);
+            }
         }
-
-
-
     }
 
     public static int readInt(Scanner scanner) {
-
         while (true) {
             if (scanner.hasNextInt()) {
                 return scanner.nextInt();
             } else {
                 System.out.println("Ошибка! Введите правильное целое число.");
                 scanner.next();
-
             }
         }
-
     }
 
     public static void fullOutputData() throws InterruptedException {
-        int num = 0;
         Scanner scanner = new Scanner(System.in);
-        for (int i = 1; i <= 5 ; i++) {
-            Thread.sleep(millis);
-            if(i != 3 && i != 4){
-                System.out.printf("задание номер %d:\nВведите целое число " +
-                        "для задания номер %d\n", i, i);
-                        num = readInt(scanner);
-            } else {
-                System.out.printf("задание номер %d:\n", i);
-            }
 
+        // Задание 1
+        System.out.printf("задание номер 1:\nВведите целое число для задания номер 1\n");
+        int num1 = readInt(scanner);
+        System.out.printf("Результат: %s\n%s\n", checkingEvenNumber(num1), sep);
 
-            System.out.printf("Результат: %s\n%s\n", switch (i) {
-                case 1 -> checkingEvenNumber(num);
-                case 2 -> findTemperature(num);
-                case 3 -> Arrays.toString(getSquaresFrom10To20());
-                case 4 -> Arrays.toString(createArrayOfSevens());
-                case 5 -> sumDigits(num, scanner);
-                default -> throw new IllegalStateException("Unexpected value: " + i);
-            }, sep);
+        Thread.sleep(millis);
 
-        }
+        // Задание 2
+        System.out.printf("задание номер 2:\nВведите температуру для задания номер 2\n");
+        int temp = readInt(scanner);
+        System.out.printf("Результат: %s\n%s\n", findTemperature(temp), sep);
+
+        Thread.sleep(millis);
+
+        // Задание 3
+        System.out.printf("задание номер 3:\nРезультат: ");
+        printSquaresFrom10To20();
+        System.out.print(sep + "\n");
+
+        Thread.sleep(millis);
+
+        // Задание 4
+        System.out.printf("задание номер 4:\nРезультат: ");
+        printArrayOfSevens();
+        System.out.print(sep + "\n");
+
+        Thread.sleep(millis);
+
+        // Задание 5
+        System.out.printf("задание номер 5:\nВведите целое положительное число для задания номер 5\n");
+        int num5 = readInt(scanner);
+        System.out.printf("Результат: %d\n%s\n", sumDigits(num5, scanner), sep);
+
         scanner.close();
     }
-
 }
