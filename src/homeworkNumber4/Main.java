@@ -7,8 +7,10 @@ import java.util.Scanner;
 public class Main {
 
     private static final String rep = "-".repeat(70);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
 
 
 
@@ -28,25 +30,43 @@ public class Main {
         countZeroElement();
         System.out.printf("\n %s\n", rep);
 
-        System.out.println("task number 5:"); // warning
+        System.out.println("task number 5:");
         reverseArray();
         System.out.printf("\n %s\n", rep);
 
         System.out.println("task number 6:\n");
-        System.out.println(isIncreasingSequence());
+        boolean result = isIncreasingSequence();
+        System.out.println(result ? "The array is increasing" : "The array is not increasing");
         System.out.printf("\n %s\n", rep);
 
-        //System.out.println("task number *:\n");
-        //System.out.println(isIncreasingSequence());
-       // System.out.printf("\n %s\n", rep);
+        System.out.println("task number *:\n");
+        System.out.println(Arrays.toString(arrayPlusOne()));
+        System.out.printf("\n %s\n", rep);
 
+    }
+
+    public static int[] arrayPlusOne(){
+        int length = lengthArr();
+        int[] num = chooseMethod(length);
+        for (int i = length - 1; i >= 0; i--) {
+            if (num[i] + 1 < 10) {
+                num[i]++;
+                return num;
+            }
+            num[i] = 0;
+
+        }
+
+        num = new int[length + 1];
+        num[0] = 1;
+        return num;
     }
 
     public static void reverseArray(){
         int length = lengthArr();
         int[] num = chooseMethod(length);
         int swap;
-        for (int i = 0, j = length - 1; i < j; i++, j--) {  // 0 1 2 3  -> 0
+        for (int i = 0, j = length - 1; i < j; i++, j--) {
             swap = num[i];
             num[i] = num[j];
             num[j] = swap;
@@ -58,7 +78,7 @@ public class Main {
         int length = lengthArr();
         int[] num = chooseMethod(length);
         for (int i = 1; i < length; i++) {
-            if (num[i] < num[i - 1]) return false;
+            if (num[i] <= num[i - 1]) return false;
         }
 
         return true;
@@ -71,7 +91,11 @@ public class Main {
         for(int number : num){
             count += number == 0 ? 1 : 0;
         }
-        System.out.println("COUNT ZERO ELEMENT: " + count);
+        if (count == 0) {
+            System.out.println("There are no zero elements");
+        } else {
+            System.out.println("COUNT ZERO ELEMENT: " + count);
+        }
     }
 
     public static void minMaxElementIndex(){
@@ -123,9 +147,9 @@ public class Main {
         System.out.println("choose a method for input\n" + "1. from the keyboard\n" +
                 "2. random");
 
-        int methodNum = correctInput(new Scanner(System.in));
+        int methodNum = correctInput(scanner);
         if (methodNum == 1)
-            return Arrays.copyOf(keyboardInout(length), length);
+            return Arrays.copyOf(keyboardInput(length), length);
         else if (methodNum == 2)
             return Arrays.copyOf(randomInput(length), length);
         else
@@ -134,15 +158,15 @@ public class Main {
     }
 
     public static int lengthArr(){
-        System.out.println("Введите размер массива");
-        return correctInput(new Scanner(System.in));
+        System.out.println("Enter the size of the array");
+        return correctInput(scanner);
 
     }
 
     public static int[] randomInput(int length){
         Random random = new Random();
         int[] numbers = new int[length];
-        System.out.printf("Заполнение массива длиной от 1 до %d рандомно\n", length);
+        System.out.printf("Filling an array of length 1 to %d randomly\n", length);
         for (int i = 0; i < length; i++) {
             System.out.print(i + 1 + ":");
             numbers[i] = random.nextInt(1, 100);
@@ -151,10 +175,9 @@ public class Main {
         return numbers;
     }
 
-    public static int[] keyboardInout(int length){
-        Scanner scanner = new Scanner(System.in);
+    public static int[] keyboardInput(int length){
         int[] numbers = new int[length];
-        System.out.printf("Заполните массив длиной от 1 до %d\n", length);
+        System.out.printf("Fill in the array with a length from 1 to %d\n", length);
         for (int i = 0; i < length; i++) {
             System.out.print(i + 1 + ":");
             numbers[i] = correctInput(scanner);
