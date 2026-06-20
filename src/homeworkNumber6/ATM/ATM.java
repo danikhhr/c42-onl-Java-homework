@@ -4,6 +4,9 @@ public class ATM {
     private int countBanknotes20;
     private int countBanknotes50;
     private int countBanknotes100;
+    private final int NOTE_20 = 20;
+    private final int NOTE_50 = 50;
+    private final int NOTE_100 = 100;
 
     public ATM(int countBanknotes20, int countBanknotes50, int countBanknotes100) {
         this.countBanknotes20 = countBanknotes20;
@@ -12,7 +15,7 @@ public class ATM {
     }
 
     public void deposit(int count20, int count50, int count100) {
-        getSum(count20, count50, count100);
+        checkDeposit(count20, count50, count100);
 
         countBanknotes20 += count20;
         countBanknotes50 += count50;
@@ -23,21 +26,25 @@ public class ATM {
 
     public boolean withdraw(int withdraw) {
         checkWithdraw(withdraw);
+        int i100;
 
+        for ( i100 = Math.min(withdraw / NOTE_100, countBanknotes100); i100 >= 0; i100--) {
+            int temp100 = withdraw - i100 * NOTE_100;
 
-        for (int i100 = Math.min(withdraw / 100 , countBanknotes100); i100 >= 0; i100--) {
-            int temp100 = withdraw - i100 * 100;
+            for (int j50 = Math.min(temp100 / NOTE_50, countBanknotes50); j50 >= 0; j50--) {
+               int temp50 = temp100  - j50 * NOTE_50;
 
-            for (int j50 = Math.min(temp100 / 50, countBanknotes50); j50 >= 0; j50--) {
-               int temp50 = temp100  - j50 * 50;
-
-                if(temp50 % 20 == 0){
-                    int temp20 = temp50 / 20;
+                if(temp50 % NOTE_20 == 0){
+                    int temp20 = temp50 / NOTE_20;
                     if(temp20 <= countBanknotes20){
                         countBanknotes50 -= j50;
                         countBanknotes20 -=  temp20;
                         countBanknotes100 -=  i100;
 
+                        System.out.printf("Выдано:\n" +
+                                "100 * %d\n" +
+                                "50 * %d\n" +
+                                "20 * %d\n", i100, j50, temp20);
                         return true;
                     }
                 }
@@ -46,30 +53,22 @@ public class ATM {
 
 
         }
-
+        System.out.println("Операция не может быть произведена");
        return false;
     }
-
-
-
-
-
-
-
-
 
 
     private int getSumBanknotes(){
         return countBanknotes20 * 20 + countBanknotes50 * 50 + countBanknotes100 * 100;
     }
 
-    private void getSum(int countBanknotes20, int countBanknotes50, int countBanknotes100){
-        if(countBanknotes20 == 0 || countBanknotes50 == 0 || countBanknotes100 == 0)
+    private void checkDeposit(int countBanknotes20, int countBanknotes50, int countBanknotes100){
+        if(countBanknotes20 < 0 || countBanknotes50 < 0 || countBanknotes100 < 0)
             throw new IllegalArgumentException("Операция не может быть произведена");
     }
 
-    private void checkWithdraw(int input){
-        if(input < 20 || input > getSumBanknotes()) throw new IllegalArgumentException("Операция не может быть произведена");
+    private void checkWithdraw(int withdraw){
+        if(withdraw < 20 || withdraw > getSumBanknotes()) throw new IllegalArgumentException("Операция не может быть произведена");
     }
 
 
