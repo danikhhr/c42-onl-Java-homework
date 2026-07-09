@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 public class Game {
 
-    public Game() {
-        initialization();
-    }
 
     private char[][] initialization(){
         char[][] board = new char[3][3];
