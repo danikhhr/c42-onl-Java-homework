@@ -4,30 +4,27 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-   private final char[][] board = new char[3][3];
-   private final Random random = new Random();
-   private int currentPlayer;
-   private final Scanner scanner = new Scanner(System.in);
-   private final String separator = "-".repeat(60);
 
     public Game() {
         initialization();
-        currentPlayer = chooseFirstPlayer();
     }
 
-    private void initialization(){
+    private char[][] initialization(){
+        char[][] board = new char[3][3];
        for (int i = 0; i < board.length; i++) {
            for (int j = 0; j < board[i].length; j++) {
                board[i][j] = '-';
            }
        }
+       return board;
    }
 
    private int chooseFirstPlayer(){
-       return currentPlayer = random.nextInt(2);
+        Random random = new Random();
+        return random.nextInt(2);
    }
 
-    private boolean checkWin(char symbol) {
+    private boolean checkWin(char symbol, char[][] board) {
 
         for (int i = 0; i < 3; i++) {
             if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol) return true;
@@ -43,6 +40,10 @@ public class Game {
     public boolean run() throws InterruptedException {
         char humanSymbol;
         char aiSymbol;
+        int currentPlayer = chooseFirstPlayer();
+        char[][] board = initialization();
+        int count = 0;
+        String separator = "-".repeat(60);
         if(currentPlayer == 0){
             humanSymbol = 'X';
             aiSymbol = 'O';
@@ -56,38 +57,39 @@ public class Game {
         }
 
         System.out.println("Поле до начала игры:");
-        printBoard();
+        printBoard(board);
         System.out.println(separator);
 
-        while (hasEmptyCells()){
+        while (hasEmptyCells(board)){
             if (currentPlayer == 0) {
                 System.out.println("Ваш ход");
-                inputFromConsole(humanSymbol);
+                inputFromConsole(humanSymbol, board);
             } else {
                 Thread.sleep(500);
                 System.out.println("Ход искусственного интеллекта");
-                inputFromAi(aiSymbol);
+                inputFromAi(aiSymbol, board);
             }
+            count++;
 
-            printBoard();
+            printBoard(board);
             System.out.println(separator);
             currentPlayer = Math.abs(currentPlayer - 1);
 
-            if(checkWin(humanSymbol)){
+            if(checkWin(humanSymbol, board) && count >= 5){
                 displayVictoryHuman(humanSymbol);
                 return true;
-            } else if(checkWin(aiSymbol)) {
+            } else if(checkWin(aiSymbol, board)) {
                 displayVictoryAi(aiSymbol);
                 return false;
             }
 
         }
         displayDraw();
-
         return false;
     }
 
-    private void inputFromAi(char symbol){
+    private void inputFromAi(char symbol, char[][] board){
+        Random random = new Random();
         int x;
         int y;
         while(true){
@@ -101,8 +103,8 @@ public class Game {
         }
     }
 
-
-    private void inputFromConsole(char symbol){
+    private void inputFromConsole(char symbol, char[][] board){
+        Scanner scanner = new Scanner(System.in);
         int x;
         int y;
         while(true){
@@ -135,8 +137,7 @@ public class Game {
         }
     }
 
-
-    private void printBoard(){
+    private void printBoard(char[][] board){
         for (char[] chars : board) {
             for (char aChar : chars) {
                 System.out.print(aChar + "\t");
@@ -145,7 +146,7 @@ public class Game {
         }
     }
 
-    private boolean hasEmptyCells(){
+    private boolean hasEmptyCells(char[][] board){
         for (char[] chars : board) {
             for (char aChar : chars) {
                 if (aChar == '-') return true;
@@ -171,7 +172,5 @@ public class Game {
         System.out.println("Ничья");
         System.out.println("------------------------------------------------------------");
     }
-
-
 
 }
