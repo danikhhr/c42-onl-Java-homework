@@ -5,23 +5,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private final int length = 20;
-    private final Scanner scanner = new Scanner(System.in);
-    private final String targetWord;
-    private final String[] words;
-    private int countAttempt = 5;
-    private final StringBuilder stringBuilder;
-    private final Random random = new Random();
 
-
-    public Game() {
-        words = inputWords();
-        targetWord = getRandomWord();
-        stringBuilder = new StringBuilder("-".repeat(targetWord.length()));
-    }
-
-
-    private String[] inputWords(){
+    private String[] initialization(int length, Scanner scanner){
         String[] words = new String[length];
         System.out.println("Введите 20 слов для игры угадай слово");
         for (int i = 0; i < length; i++) {
@@ -31,18 +16,24 @@ public class Game {
         return words;
     }
 
-    private String getRandomWord(){
-
-       return words[random.nextInt(length)];
+    private String getRandomWord(String[] words, int length){
+        Random random = new Random();
+        return words[random.nextInt(length)];
     }
 
-
-    public boolean start(){
+    public boolean run(){
         String input;
+        int length = 5;
+        int countAttempt = 5;
+        Scanner scanner = new Scanner(System.in);
+        String[] words = initialization(length, scanner);
+        String targetWord = getRandomWord(words, length);
+        StringBuilder stringBuilder = new StringBuilder("-".repeat(targetWord.length()));
+
         System.out.println("------------------- ИГРА НАЧАЛАСЬ -------------------");
         System.out.println("Загадано слово из " + targetWord.length() + " букв");
-        while (countAttempt > 0 && !isWordGuessed()) {
 
+        while (countAttempt > 0 && !isWordGuessed(targetWord, stringBuilder)) {
             System.out.println("ВВЕДИТЕ СЛОВО ИЛИ БУКВУ");
             input = scanner.nextLine().trim();
 
@@ -54,7 +45,7 @@ public class Game {
 
             if(input.length() > 1){
                 if(input.equalsIgnoreCase(targetWord)){
-                    displayVictory();
+                    displayVictory(targetWord);
                     return true;
                 } else {
                     countAttempt--;
@@ -62,7 +53,7 @@ public class Game {
                 }
             } else {
                     char guess = input.charAt(0);
-                    boolean found = processGuess(guess);
+                    boolean found = processGuess(guess, targetWord, stringBuilder);
 
                 if (found) {
                     System.out.printf("Буква найдена!\nОсталось %d попыток\n", countAttempt);
@@ -75,17 +66,17 @@ public class Game {
 
         }
 
-        if (isWordGuessed()) {
-            displayVictory();
+        if (isWordGuessed(targetWord, stringBuilder)) {
+            displayVictory(targetWord);
         } else {
-            displayDefeat();
+            displayDefeat(targetWord);
         }
 
-        return isWordGuessed();
+        return isWordGuessed(targetWord, stringBuilder);
     }
 
 
-    private boolean processGuess(char guess){
+    private boolean processGuess(char guess, String targetWord, StringBuilder stringBuilder){
         boolean found = false;
 
         for (int i = 0; i < targetWord.length(); i++) {
@@ -95,7 +86,7 @@ public class Game {
             }
 
             if(Character.toLowerCase(guess) == Character.toLowerCase(targetWord.charAt(i))){
-                stringBuilder.setCharAt(i, Character.toLowerCase(guess));
+                stringBuilder.setCharAt(i, targetWord.charAt(i));
                 found = true;
             }
 
@@ -109,19 +100,19 @@ public class Game {
 
     }
 
-    private boolean isWordGuessed(){
+    private boolean isWordGuessed(String targetWord, StringBuilder stringBuilder){
         return stringBuilder.toString().equalsIgnoreCase(targetWord);
     }
 
 
 
-    private void displayVictory() {
+    private void displayVictory(String targetWord) {
         System.out.println("------------------- ПОБЕДА -------------------");
         System.out.println("Поздравляю! Вы угадали слово: " + targetWord);
         System.out.println("----------------------------------------------");
     }
 
-    private void displayDefeat() {
+    private void displayDefeat(String targetWord) {
         System.out.println("------------------- ПОРАЖЕНИЕ -------------------");
         System.out.println("Вы не угадали слово: " + targetWord);
         System.out.println("----------------------------------------------");
