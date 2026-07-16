@@ -4,7 +4,6 @@ import homeworkNumber9.Cloaneble.Dog;
 import homeworkNumber9.geometricShapes.*;
 import homeworkNumber9.workingPositions.*;
 
-
 public class Main {
 
     private static final String separator = "-".repeat(50);
