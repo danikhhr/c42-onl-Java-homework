@@ -1,13 +1,9 @@
 package homeworkNumber9;
 
 import homeworkNumber9.Cloaneble.Dog;
-import homeworkNumber9.geometricShapes.Circle;
-import homeworkNumber9.geometricShapes.Shape;
-import homeworkNumber9.geometricShapes.Square;
-import homeworkNumber9.geometricShapes.Triangle;
-import homeworkNumber9.workingPositions.Accountant;
-import homeworkNumber9.workingPositions.Director;
-import homeworkNumber9.workingPositions.Worker;
+import homeworkNumber9.geometricShapes.*;
+import homeworkNumber9.workingPositions.*;
+
 
 public class Main {
 
@@ -47,7 +43,6 @@ public class Main {
             resPerimeter += shape.perimeterOfShape();
         }
         System.out.println("Сумма периметра всех фигур: " + resPerimeter);
-
     }
 
     public static void cloneAble(){
