@@ -1,23 +1,16 @@
 package homeworkNumber10.User;
 
-public class User2 implements Cloneable {
-    private int id;
+public class Owner implements Cloneable{
+
     private String userName;
 
-    public User2(String userName, int id) {
-        this.id = id;
+    public Owner(String userName) {
+
         this.userName = userName;
     }
 
-
-    @Override
-    public User2 clone() throws CloneNotSupportedException {
-        User2 user2 = (User2) super.clone();
-        return user2;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public String getUserName() {
+        return userName;
     }
 
     public void setUserName(String userName) {
@@ -26,8 +19,12 @@ public class User2 implements Cloneable {
 
     @Override
     public String toString() {
-        return "User system(\n\t" +
-                "username: " + this.userName +
-                "\n\tuser id: " + this.id;
+        return userName;
+
+    }
+
+    @Override
+    public Owner clone() throws CloneNotSupportedException {
+        return (Owner) super.clone();
     }
 }

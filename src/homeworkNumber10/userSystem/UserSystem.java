@@ -1,4 +1,4 @@
-package homeworkNumber10;
+package homeworkNumber10.userSystem;
 
 import java.util.Objects;
 
