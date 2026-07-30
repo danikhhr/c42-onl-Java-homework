@@ -111,6 +111,7 @@ public class Main {
                 choice = scanner.nextInt();
                 if(choice == 1 || choice == 2 )
                     return choice;
+                else System.out.println("Введено некорректное значение повторите попытку");;
             } catch (InputMismatchException e) {
                 System.out.println("Введено некорректное значение повторите попытку");
                 scanner.next();
