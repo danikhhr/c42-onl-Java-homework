@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -95,7 +96,7 @@ public class Main {
         while (true) {
             try {
                 return scanner.nextInt();
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Введено некорректное значение повторите попытку");
                 scanner.next();
             }
@@ -110,7 +111,7 @@ public class Main {
                 choice = scanner.nextInt();
                 if(choice == 1 || choice == 2 )
                     return choice;
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Введено некорректное значение повторите попытку");
                 scanner.next();
             }
