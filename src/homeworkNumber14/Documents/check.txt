@@ -1,0 +1,16 @@
+docnum123456789
+docnumabcdefghi
+contract1234567
+contractabcdefg
+docnum123abc456
+docnum12345
+docnum1234567890
+contract12
+contract1234567890
+123456789012345
+abcdocnum123456
+contract1a2b3c4d5
+docnum000000000
+contract9999999
+docnumABCDEFGHI
+contractXYZ12345
