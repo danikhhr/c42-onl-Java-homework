@@ -1,6 +1,7 @@
 package homeworkNumber15;
 
 import homeworkNumber15.Animals.Animals;
+import homeworkNumber15.DynamicCollection.DynamicCollection;
 import homeworkNumber15.Student.Student;
 
 import java.util.*;
@@ -11,8 +12,9 @@ public class Main {
         System.out.println("=".repeat(60));
         //createAnimals();
         System.out.println("=".repeat(60));
-        createStudents();
+        //createStudents();
         System.out.println("=".repeat(60));
+        createDynamicCollection();
     }
 
     public static void removeDuplicates() {
@@ -42,5 +44,20 @@ public class Main {
         List<Student> studentList = new ArrayList<>(List.of(student1, student2, student3, student4));
         Student.processStudents(studentList);
         Student.printStudents(studentList, 2);
+    }
+
+    public static void createDynamicCollection() {
+        DynamicCollection<Integer> list = new DynamicCollection<>();
+        System.out.println(list.add(5));
+        list.add(6);
+        list.add(4);
+        System.out.println(list.remove(6));
+        System.out.println(list.getSize());
+        System.out.println(list.contains(4));
+        System.out.println(list.get(0));
+        System.out.println(list);
+        list.clear();
+        System.out.println(list);
+
     }
 }
