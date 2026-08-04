@@ -1,64 +1,57 @@
-package LifeBinaryCalculator;
+package LiveBinaryCalculator;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    private static final StringBuilder stringBuilder = new StringBuilder();
+    private static String textToOutput;
     public static void main(String[] args) {
+        int choice;
+        Scanner scanner = new Scanner(System.in);
         while(true) {
-            System.out.println("""
-                Выберите способ перевода:
-                1 — с использованием массива;
-                2 — с использованием рекурсии.
-                Введите номер варианта:
-                """);
-            Scanner scanner = new Scanner(System.in);
-            int choice = correctInputChoice(scanner);
-            System.out.println("=".repeat(60));
-            System.out.println("""
-                Введите десятичное число:
-                """);
-            System.out.println("=".repeat(60));
-            int number = correctInputNumber(scanner);
-            if (choice == 1) {
-                String text = """
-                    Исходное десятичное число: %d
-                    Способ перевода: с использованием массива
-                    Процесс перевода: %d
-                    """.formatted(number,  binaryCalculatorWithArray(number));
-                System.out.println(text);
-                System.out.println();
-                writeToFile(text);
-            } else {
-                String text = """
-                    Исходное десятичное число: %d
-                    Способ перевода: с использованием рекурсии
-                    Процесс перевода: %d
-                    """.formatted(number, binaryCalculatorWithRecursion(number));
-                System.out.println(text);
-                System.out.println();
-                writeToFile(text);
-            }
-            System.out.println("=".repeat(60));
-            System.out.println("""
-                    Хотите ввести еще одно число:
-                    1 - да;
-                    2 - нет;
+            run(scanner);
+            System.out.print("""
+                    Хотите ввести другое десятичное число?
+                    1 — да;
+                    2 — нет.
                     """);
             choice = correctInputNumber(scanner);
             if(choice == 2) {
-                System.out.println("""
+                System.out.print("""
                         Все результаты сохранены в файле conversion_history.txt.
                         Работа программы завершена.
                         """);
                 break;
             }
         }
+    }
 
+    public static void run(Scanner scanner) {
+        System.out.print("""
+                Выберите способ перевода:
+                1 — с использованием массива;
+                2 — с использованием рекурсии.
+                Введите номер варианта:
+                """);
+        System.out.println("=".repeat(60));
+        int choice = correctInputChoice(scanner);
+        System.out.print("""
+                Введите десятичное число:
+                """);
+        System.out.println("=".repeat(60));
+        int number = correctInputNumber(scanner);
+        if (choice == 1) {
+            printInformation(number, "массива", binaryCalculatorWithArray(number));
+            writeToFile(textToOutput);
+        } else {
+            printInformation(number, "рекурсии", binaryCalculatorWithRecursion(number));
+            writeToFile(textToOutput);
+        }
+        System.out.println("=".repeat(60));
     }
 
     public static int binaryCalculatorWithArray(int num) {
@@ -71,11 +64,10 @@ public class Main {
         }
         int[] values = new int[length];
         for (int i = 0; i < length; i++) {
-            System.out.println(num + " / 2 = " + num / 2  + ", остаток " + num % 2 );
+            stringBuilder.append(num).append(" / 2 = ").append(num / 2).append(", остаток ").append(num % 2).append("\n");
             values[length - 1 - i] = num % 2;
             num /= 2;
         }
-
         for(int el : values) {
             res = res * 10 + el;
         }
@@ -83,7 +75,7 @@ public class Main {
     }
 
     public static int binaryCalculatorWithRecursion(int num) {
-        System.out.println(num + " / 2 = " + num / 2 + ", остаток " + num % 2);
+        stringBuilder.append(num).append(" / 2 = ").append(num / 2).append(", остаток ").append(num % 2).append("\n");
         if (num <= 1) {
             return num;
         }
@@ -91,14 +83,16 @@ public class Main {
     }
 
     public static int correctInputNumber(Scanner scanner) {
+        int number;
         while (true) {
             try {
-                return scanner.nextInt();
+                number = scanner.nextInt();
+                if(number > 0 ) return number;
+                else System.out.println("Введено отрицательное значение повторите попытку");
             } catch (InputMismatchException e) {
                 System.out.println("Введено некорректное значение повторите попытку");
                 scanner.next();
             }
-
         }
     }
 
@@ -109,22 +103,41 @@ public class Main {
                 choice = scanner.nextInt();
                 if(choice == 1 || choice == 2 )
                     return choice;
-                else System.out.println("Введено некорректное значение повторите попытку");;
+                else System.out.println("Введено некорректное значение повторите попытку");
             } catch (InputMismatchException e) {
-                System.out.println("Введено некорректное значение повторите попытку");
+                System.out.println("Введено нечисловое значение повторите попытку");
                 scanner.next();
             }
-
         }
     }
 
+    public static void printInformation(int number, String operation, int result) {
+        textToOutput = """
+                Исходное число: %d
+                Способ перевода: с использованием %s
+                
+                Процесс перевода:
+                %s
+                
+                Остатки в обратном порядке: %d
+                Двоичное значение числа %d: %d
+                """.formatted(number, operation, stringBuilder.toString(), result, number, result);
+        System.out.println(textToOutput);
+    }
+
     public static void writeToFile(String text) {
-        try {
-            Files.writeString(Path.of("src/LifeBinaryCalculator/conversion_history.txt"), text);
+        try(FileWriter fileWriter = new FileWriter("src/LiveBinaryCalculator/conversion_history.txt", true)) {
+             fileWriter.write(text);
+             fileWriter.write("=".repeat(60));
+             fileWriter.write("\n");
         } catch (FileNotFoundException e) {
             System.out.println("file not exist");
         } catch (IOException e) {
-            System.out.println("smth wrong");;
+            System.out.print("""
+                    Файл не был записан по непонятным причинам
+                    """);
+        } finally {
+            stringBuilder.delete(0, stringBuilder.length());
         }
     }
 }
