@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    private static final StringBuilder stringBuilder = new StringBuilder();
+    private static StringBuilder stringBuilder = new StringBuilder();
     private static String textToOutput;
     public static void main(String[] args) {
         int choice;
@@ -137,7 +137,7 @@ public class Main {
                     Файл не был записан по непонятным причинам
                     """);
         } finally {
-            stringBuilder.delete(0, stringBuilder.length());
+            stringBuilder = new StringBuilder();
         }
     }
 }
