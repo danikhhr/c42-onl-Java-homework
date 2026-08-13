@@ -1,55 +1,64 @@
 package smartHome.Devices;
 
-import smartHome.InterfacesAndAbstractClasses.SmartCamera;
+import smartHome.InterfacesAndAbstractClasses.AbstractDevices;
 
-public class Camera extends SmartCamera {
+public class SmartCamera extends AbstractDevices  {
+
+    private boolean wifiIsOn;
+    private final String PASSWORD = "1111";
+    private final String ANOTHER_PASSWORD = "1981412";
+    private final String wifiName;
+    private boolean isRecord;
+
+    public SmartCamera(String name, boolean isOn, String serialNumber, String wifiName) {
+        super(name, isOn, serialNumber);
+        wifiIsOn = false;
+        this.wifiName = wifiName;
+        isRecord = true;
+    }
+
+
     @Override
-    public void connectWifi() {
-
+    public void connectToAnotherWIFI(String password) {
+        if (password.equals(ANOTHER_PASSWORD)) {
+            System.out.println("Вы успешно подключились к другой сети wifi");
+            wifiIsOn = true;
+        } else {
+            System.out.println("Вы ввели неверный пароль, повторите попытку");
+            wifiIsOn = false;
+        }
     }
 
     @Override
-    public boolean isConnectWifi() {
-        return false;
+    public void OnRecording() {
+        isRecord = true;
     }
 
     @Override
-    public void startRecording() {
-
+    public void OffRecording() {
+        isRecord = false;
     }
 
     @Override
-    public void stopRecording() {
-
+    public String getStatus() {
+        return String.format("устройство %s, wifi %s, запись идет %b\n",
+                isOn? "включено": "выключено", wifiIsOn? "включен" : "выключен", isRecord) ;
     }
 
+
     @Override
-    public boolean isRecording() {
-        return false;
+    public void connectToWiFi(String password) {
+        if(wifiIsOn) {
+            System.out.println("Вы уже подключены к этой сети");
+        } else if(PASSWORD.equals(password)) {
+            wifiIsOn = true;
+            System.out.println("Вы успешно подключились");
+        } else System.out.println("Вы ввели неверный пароль");
     }
 
-    @Override
-    public void setRecordingAutomatically(boolean enable) {
-
-    }
 
     @Override
-    public void ON() {
-
-    }
-
-    @Override
-    public void OFF() {
-
-    }
-
-    @Override
-    public void getStatus() {
-
-    }
-
-    @Override
-    public void getDeviceType() {
-
+    public String toString() {
+        return String.format("имя устройства: %s (%s)", name, serialNumber);
     }
 }

@@ -1,52 +1,34 @@
 package smartHome.Devices;
 
-import smartHome.InterfacesAndAbstractClasses.SmartLight;
+import smartHome.InterfacesAndAbstractClasses.AbstractDevices;
 
-public class Light extends SmartLight {
-    private String status;
+public class SmartLight extends AbstractDevices {
 
-    @Override
-    public void setLight() {
+    private int brightness;
+
+    public SmartLight(String name, boolean isOn, String serialNumber, int brightness) {
+        super(name, isOn, serialNumber);
+        this.brightness = brightness;
+    }
+
+    public void setBrightness(int brightness) {
+        if(brightness >= 0 && brightness <= 100) {
+            this.brightness = brightness;
+            System.out.println("Яркость успешна изменена");
+        } else System.out.println("Не удалось изменить яркость");
 
     }
 
-    @Override
-    public void setBrightness(int level) {
 
+    @Override
+    public String getStatus() {
+        return String.format("устройство %s, уровень яркости %d%%\n",
+                isOn? "включено": "выключено", brightness) ;
     }
 
-    @Override
-    public int getBrightness() {
-        return 0;
-    }
 
     @Override
-    public void increaseBrightness() {
-
-    }
-
-    @Override
-    public void decreaseBrightness() {
-
-    }
-
-    @Override
-    public void ON() {
-
-    }
-
-    @Override
-    public void OFF() {
-
-    }
-
-    @Override
-    public void getStatus() {
-
-    }
-
-    @Override
-    public void getDeviceType() {
-
+    public String toString() {
+        return String.format("имя устройства: %s (%s), уровень яркости %d%%", name, serialNumber, brightness);
     }
 }
