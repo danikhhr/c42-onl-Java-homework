@@ -36,8 +36,8 @@ public class Login {
             throw new WrongPasswordException("пароль не должен содержать пробелы");
 
         Pattern pattern = Pattern.compile(".[0-9]+.");
-        Matcher confPassword = pattern.matcher(confirmPassword);
-        if(!confPassword.find())
+        Matcher passwordMatcher = pattern.matcher(password);
+        if(!passwordMatcher.find())
             throw new WrongPasswordException("пароль должен содержать хотя бы одну цифру");
 
         if(!password.equals(confirmPassword))
