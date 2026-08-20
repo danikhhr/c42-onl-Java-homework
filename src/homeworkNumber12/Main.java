@@ -16,10 +16,14 @@ public class Main {
         Pattern pattern = Pattern.compile("\\b[A-Z]{2,6}\\b");
         System.out.println("Введите строку с аббревиатурами (от 2 до 6 прописных букв, без чисел):");
         Matcher matcher = pattern.matcher(scanner.nextLine());
-        if(matcher.find()) {
-            while(matcher.find())
-                System.out.println(matcher.group());
-        } else System.out.println("аббревиатура не найдена");
+        boolean found = false;
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            found = true;
+        }
+        if (!found) {
+            System.out.println("Аббревиатуры не были найдены");
+        }
     }
 
     public static void findSomeInformation(Scanner scanner) {
