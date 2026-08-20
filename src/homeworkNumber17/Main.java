@@ -32,7 +32,7 @@ public class Main {
 
     public static void callPredicate(int[] numbers) {
         System.out.println("Положительные числа");
-        Predicate<Integer> positive = x -> x >= 0;
+        Predicate<Integer> positive = x -> x > 0;
         for (int number : numbers) {
             if (positive.test(number)) System.out.print(number + "\t");
         }
