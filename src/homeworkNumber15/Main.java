@@ -8,11 +8,11 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        //removeDuplicates();
+        removeDuplicates();
         System.out.println("=".repeat(60));
-        //createAnimals();
+        createAnimals();
         System.out.println("=".repeat(60));
-        //createStudents();
+        createStudents();
         System.out.println("=".repeat(60));
         createDynamicCollection();
     }
@@ -22,10 +22,11 @@ public class Main {
         Set<Integer> result = new HashSet<>();
         System.out.println("Введите набор чисел в виде одной строки с клавиатуры. Например: \"1, 2, 3, " +
                 "4, 4, 5\"");
-        String[] numbers = scanner.nextLine().split("[,\\s]");
+        String[] numbers = scanner.nextLine().split("[^\\d-]+");
         for(String number : numbers) result.add(Integer.parseInt(number));
 
-        result.forEach(num -> System.out.print(num + " "));
+        result.forEach(num -> System.out.print(num + "\t"));
+        System.out.println();
     }
 
     public static void createAnimals() {
